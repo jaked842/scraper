@@ -7,6 +7,7 @@ import time
 PATH = '/Users/admin/Downloads/chromedriver'
 driver = webdriver.Chrome(PATH)
 
+# Finds 6.5 Creedmoor Gold Ammo (Match) Federal Premium
 
 driver.get('https://www.federalpremium.com/rifle/fusion/')
 
@@ -34,6 +35,9 @@ for x in range(12):
         continue
     else:
         nme = products[x].find_element_by_class_name('pdp-link').text
-        prce = products[x].find_element_by_class_name('value').text
+        lnk = products[x].find_element_by_link_text(nme).get_attribute("href")
+        prce = products[x].find_element_by_xpath(".//span[@class='value']").text
+        res = "Ammo: " + nme + "\n" + "Price: " + prce + "\n" + "Link: " + lnk
 
-        print(f'{nme}')
+        print(res)
+
